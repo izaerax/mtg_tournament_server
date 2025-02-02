@@ -12,7 +12,7 @@ class UserController extends Controller
         $user = $request->user();
         return response()->json([
             'name' => $user->name,
-            'email' => $user->email
+            'email' => $user->email,
         ]);
     }
 }

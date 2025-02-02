@@ -10,6 +10,10 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
+
+    /**
+     * Perform the login action
+     */
     public function login(Request $request)
     {
         $request->validate([
@@ -37,6 +41,9 @@ class AuthController extends Controller
         ]);
     }
 
+    /**
+     * Perform the logout
+     */
     public function logout(Request $request)
     {
         $request->user()->tokens()->delete();
@@ -45,6 +52,9 @@ class AuthController extends Controller
         ]);
     }
 
+    /**
+     * Register a new user
+     */
     public function register(Request $request) {
         $request->validate([
             'name' => 'required|min:4',
