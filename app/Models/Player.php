@@ -12,6 +12,12 @@ class Player extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'firstname',
+        'lastname',
+        'dci_number'
+    ];
+
     public function user(): BelongsTo {
         return $this->belongsTo(User::class, 'player_id');
     }
