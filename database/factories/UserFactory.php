@@ -27,6 +27,9 @@ class UserFactory extends Factory
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
+            'firstname' => fake()->firstName,
+            'lastname' => fake()->lastName,
+            'dci_number' => fake()->randomNumber(5),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
@@ -40,12 +43,6 @@ class UserFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'email_verified_at' => null,
-        ]);
-    }
-
-    public function withPlayer() {
-        return $this->state(fn (array $attributes) => [
-            'player_id' => Player::factory()
         ]);
     }
 }

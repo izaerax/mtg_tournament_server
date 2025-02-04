@@ -11,7 +11,6 @@ Route::post('register', [AuthController::class, 'register']);
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);
-    Route::get('user', [UserController::class, 'show']);
-    Route::apiResource('players', PlayerController::class);
+    Route::get('users', [UserController::class, 'list']);
 });
 

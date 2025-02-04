@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\AuthResource;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Hash;
@@ -34,11 +35,7 @@ class AuthController extends Controller
         }
 
         $token = $user->createToken('api-token')->plainTextToken;
-        return response()->json([
-            'name' => $user->name,
-            'email' => $user->email,
-            'token'=> $token
-        ]);
+        return AuthResource::make($user)->toArray($request, $token);
     }
 
     /**
@@ -47,9 +44,6 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         $request->user()->tokens()->delete();
-        return response()->json([
-            'message'=> 'Logout'
-        ]);
     }
 
     /**
@@ -58,6 +52,8 @@ class AuthController extends Controller
     public function register(Request $request) {
         $request->validate([
             'name' => 'required|min:4',
+            'firstname' => 'required',
+            'lastname' => 'required',
             'email'=>'required|email',
             'password'=> 'required|confirmed|min:3',
         ]);
@@ -71,15 +67,13 @@ class AuthController extends Controller
 
         $user = User::create([
             'name' => $request->name,
+            'firstname' => $request->firstname,
+            'lastname' => $request->lastname,
             'email' => $request->email,
             'password' => Hash::make($request->password)
         ]);
 
         $token = $user->createToken('api-token')->plainTextToken;
-        return response()->json([
-            'name' => $user->name,
-            'email' => $user->email,
-            'token'=> $token
-        ]);
+        return AuthResource::make($user)->toArray($request, $token);
     }
 }

@@ -22,6 +22,9 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'firstname',
+        'lastname',
+        'dci_number',
         'email',
         'password',
     ];
@@ -47,9 +50,5 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
-    }
-
-    public function player(): BelongsTo {
-        return $this->belongsTo(Player::class);
     }
 }

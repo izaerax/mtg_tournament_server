@@ -11,10 +11,10 @@ class Subscription extends Model
     use HasFactory;
 
     public function player(): BelongsTo {
-        return $this->belongsTo(Player::class, 'player_id');
+        return $this->belongsTo(User::class);
     }
 
     public function tournament(): BelongsTo {
-        return $this->belongsTo(Tournament::class, 'tournament_id');
+        return $this->belongsTo(Tournament::class);
     }
 }

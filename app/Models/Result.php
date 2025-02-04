@@ -14,7 +14,7 @@ class Result extends Model
         return $this->belongsTo(Round::class);
     }
 
-    public function player(): BelongsTo {
-        return $this->belongsTo(Player::class);
+    public function user(): BelongsTo {
+        return $this->belongsTo(User::class);
     }
 }
