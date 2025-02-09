@@ -23,10 +23,14 @@ class DatabaseSeeder extends Seeder
             'password'=> Hash::make('admin')
         ]);
 
-        User::factory()->count(20)->create();
+        User::factory()->count(40)->create();
 
         $league = League::factory()->create(['name' => 'Cittadino 1']);
-        Tournament::factory()->count(5)->withLeague($league)->create();
+        Tournament::factory()
+            ->count(5)
+            ->withLeague($league)
+            ->withRandomSubscriptions()
+            ->create();
 
         $league = League::factory()->create(['name' => 'Cittadino 2']);
         Tournament::factory()->count(5)->withLeague($league)->create();
