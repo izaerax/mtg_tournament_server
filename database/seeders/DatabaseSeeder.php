@@ -26,13 +26,19 @@ class DatabaseSeeder extends Seeder
         User::factory()->count(40)->create();
 
         $league = League::factory()->create(['name' => 'Cittadino 1']);
+        $this->createTournament($league);
+
+        $league = League::factory()->create(['name' => 'Cittadino 1']);
+        $this->createTournament($league);
+
+    }
+
+    private function createTournament($league) {
         Tournament::factory()
             ->count(5)
             ->withLeague($league)
             ->withRandomSubscriptions()
+            ->withRounds()
             ->create();
-
-        $league = League::factory()->create(['name' => 'Cittadino 2']);
-        Tournament::factory()->count(5)->withLeague($league)->create();
     }
 }

@@ -45,4 +45,14 @@ class TournamentFactory extends Factory
             )
         );
     }
+
+    public function withRounds() {
+        return $this->afterCreating(function ($tournament) {
+            for($i = 0; $i < $tournament->rounds; $i++) {
+                $tournament->rounds()->create([
+                    'number' => $i+1
+                ]);
+            }
+        });
+    }
 }

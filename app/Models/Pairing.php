@@ -7,15 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Round extends Model
+class Pairing extends Model
 {
+    /** @use HasFactory<\Database\Factories\PairingFactory> */
     use HasFactory;
 
-    public function tournament(): BelongsTo {
-        return $this->belongsTo(Tournament::class);
+    public function round(): BelongsTo {
+        return $this->belongsTo(Round::class);
     }
 
-    public function pairings(): HasMany {
-        return $this->hasMany(Pairing::class);
+    public function results(): HasMany {
+        return $this->hasMany(Result::class);
     }
 }

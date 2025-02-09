@@ -1,9 +1,9 @@
 <?php
 
-use App\Models\Tournament;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\Round;
 
 return new class extends Migration
 {
@@ -12,11 +12,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rounds', function (Blueprint $table) {
+        Schema::create('pairings', function (Blueprint $table) {
             $table->id();
-            $table->integer('number');
-            $table->foreignIdFor(Tournament::class)->index();
             $table->timestamps();
+            $table->foreignIdFor(Round::class)->index();
+            $table->boolean('done');
         });
     }
 
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('rounds');
+        Schema::dropIfExists('pairings');
     }
 };

@@ -1,5 +1,5 @@
 <?php
-use App\Models\Round;
+use App\Models\Pairing;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -14,8 +14,8 @@ return new class extends Migration
     {
         Schema::create('results', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class)->index()->constrained();
-            $table->foreignIdFor(Round::class)->index()->constrained();
+            $table->foreignIdFor(User::class)->index();
+            $table->foreignIdFor(Pairing::class)->index();
             $table->integer('wins');
             $table->integer('draws');
             $table->integer('lost');
