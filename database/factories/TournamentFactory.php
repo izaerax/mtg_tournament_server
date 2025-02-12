@@ -23,7 +23,8 @@ class TournamentFactory extends Factory
             'date' => now(),
             'rounds' => 4,
             'games' => 3,
-            'duration' => 45
+            'duration' => 45,
+            'sub_fee' => 5.00,
         ];
     }
 

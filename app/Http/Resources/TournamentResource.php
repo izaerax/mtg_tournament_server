@@ -14,6 +14,7 @@ class TournamentResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $totalPlayers = $this->subscriptions()->count();
         return [
             'id' => $this->id,
             'date' => $this->date,
@@ -21,6 +22,8 @@ class TournamentResource extends JsonResource
             'games' => $this->games,
             'duration' => $this->duration,
             'league' => $this->league?->name,
+            'playersCount' => $totalPlayers,
+            'prize' => $totalPlayers * $this->sub_fee, //TODO: define prize
         ];
     }
 }

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('rounds');
             $table->integer('games');
             $table->integer('duration');
+            $table->float('sub_fee');
             $table->timestamps();
         });
     }
