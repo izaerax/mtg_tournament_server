@@ -11,6 +11,8 @@ class Tournament extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id'];
+
     public function league(): BelongsTo {
         return $this->belongsTo(League::class);
     }

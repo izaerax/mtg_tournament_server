@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\League;
 use App\Http\Resources\LeagueResource;
-
+use Illuminate\Support\Facades\DB;
 
 class LeagueController extends Controller
 {
@@ -23,10 +23,23 @@ class LeagueController extends Controller
      */
     public function store(Request $request)
     {
-        League::create([
-            'name' => $request->name,
-            'state' => 'new'
-        ]);
+        return DB::transaction(function () use ($request) {
+            $league = League::create([
+                'name' => $request->name,
+                'state' => 'new'
+            ]);
+
+            $league->tournaments()->create([
+                'date' => today(),
+                'rounds' => $request->rounds,
+                'duration' => $request->duration,
+                'games' => $request->games,
+                'sub_fee' => $request->sub_fee,
+            ]);
+
+            return $league->id;
+        });
+
     }
 
     /**
